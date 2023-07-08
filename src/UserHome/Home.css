@@ -1,0 +1,22 @@
+.user-home {
+    margin: auto;
+    padding: 16px;
+}
+
+.featured-section h1 {
+    color: black;
+    font-size: 3em;
+    font-weight: bold;
+}
+
+.featured-section hr {
+    border: 10px dotted black;
+    border-style: none none dotted;
+}
+
+.featured-section div {
+    padding-top: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1.5rem;
+}

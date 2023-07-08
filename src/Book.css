@@ -1,0 +1,55 @@
+.book {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 32px;
+    width: 250px;
+    height: 500px;
+    background-color: white;
+}
+
+.book-title {
+    font-size: 1.2em;
+    font-weight: lighter;
+    color: black;
+}
+
+.book-rating {
+    font-size: 1.2em;
+    font-weight: lighter;
+    color: black;
+}
+
+.book-price {
+    font-size: 1.4em;
+    font-weight: normal;
+    color: black;
+}
+
+.book-cover {
+    border-radius: 4px;
+    width: 100%;
+    color: white;
+}
+
+
+.view-btn {
+    cursor: pointer;
+    
+    padding: 1rem 2rem;
+    border: 1px solid #222121;
+    color: #e6e6e6;
+    border-radius: 4px;
+ 
+    font-weight: bold;
+    font-size: 1.2em;
+}
+
+.user {
+    background-color: #ce5454;
+}
+.user:hover,
+.user:active {
+    background-color: #b44848;
+}
