@@ -1,0 +1,52 @@
+.account-form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 16px;
+    width: 30%;
+    margin: 2rem auto;
+    background-color: #f0e9e9;
+}
+
+.account-form hr {
+    margin-top: 16px;
+    display: block;
+    width: 96%;               
+    background-color:black;
+    height: 4px;
+}
+
+.account-form p {
+    font-size: 20px
+}
+
+.account-form input {
+    font: inherit;
+    padding: 1rem;
+    margin: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 90%;
+}
+
+.account-edit-btn {
+    cursor: pointer;
+    margin-top: 1rem;
+    width: 50%;
+    padding: 1rem .5rem;
+    border: 1px solid black;
+    background-color: gray;
+    color: #e6e6e6;
+    border-radius: 4px;
+    font-size: 1.2em;
+    text-align: center;
+}
+.account-edit-btn:hover,
+.account-edit-btn:active {
+    background-color: darkgray;
+}
+
+.account-link {
+    margin: auto;
+    text-decoration: none;
+}
