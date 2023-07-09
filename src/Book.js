@@ -6,14 +6,12 @@ export default function Book(props)
 {
     return (
         <Card className='book'>
-            <img src={props.image} alt={props.description} className='cover-img'/>
-            <h2 className='book-price'>${props.prie}</h2>
-            <h2 className='book-title'>{props.title}</h2>
-            <h2 className='book-author'>Author: {props.author}</h2>
-            <h2 className='book-rating'>{props.rating} / 5</h2>
+            <img src={props.cover} alt={props.description} className='cover-img'/>
+            <h2 className='book-listing'>{props.title} by: {props.author} [{props.rating} / 5⭐]</h2>
+            <h2 className='book-price'>${props.price}</h2>
 
-            <Link className='view-btn' to={`/View/${props.isbn}`} state={{isbn: props.isbn}}>
-                <button className='view-btn user'>View Details</button>
+            <Link to={`/View/${props.isbn}`} state={{isbn: props.isbn}}>
+                <button className='view-details-btn user'>View Details</button>
             </Link>
         </Card>
     );
