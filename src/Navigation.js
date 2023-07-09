@@ -2,9 +2,9 @@ import './Navigation.css';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
-export default function Nagivation()
+export default function Nagivation(props)
 {
-    const [ loggedIn, setLoggedIn ] = useState(false);
+    const [ loggedIn, setLoggedIn ] = useState(true);
     const navigate = useNavigate();
 
     function logout() {
@@ -23,7 +23,7 @@ export default function Nagivation()
             </li>
             <li className='cart' key='cart'>
                 <Link className='nav-link' to='/Cart'>Cart</Link>
-                <span className='cart-count'>2</span>
+                <span className='cart-count'>{props.cart || 0}</span>
             </li>
 
             {(loggedIn) ? 
