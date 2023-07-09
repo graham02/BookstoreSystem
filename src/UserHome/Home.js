@@ -19,7 +19,7 @@ export default function Home()
                 <hr></hr>
                 <div>
                     <Featured cat='Top Sellers'/>
-                </div>
+                </div>  
             </div>
         </div>
     </>);
