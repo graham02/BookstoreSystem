@@ -10,7 +10,7 @@ export default function Book(props)
             <h2 className='book-listing'>{props.title} by: {props.author} [{props.rating} / 5⭐]</h2>
             <h2 className='book-price'>${props.price}</h2>
 
-            <Link to={`/View/${props.isbn}`} state={{isbn: props.isbn}}>
+            <Link to={`/View/${props.isbn}`} state={{book: props}}>
                 <button className='view-details-btn user'>View Details</button>
             </Link>
         </Card>
