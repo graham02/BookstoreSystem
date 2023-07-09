@@ -10,7 +10,6 @@ import AddBook from './AdminHome/AddBook';
 import RemoveBook from './AdminHome/RemoveBook';
 import UpdateBook from './AdminHome/UpdateBook';
 import AccountPage from './Account/AccountPage';
-import EditProfile from './Account/EditProfile';
 import OrderHistory from './Account/OrderHistory';
 
 export default function App() {
@@ -22,7 +21,6 @@ export default function App() {
         <Route path='/Signup' element={<Signup/>} />
         <Route path='/ForgotPassword' element={<ForgotPassword/>} />
         <Route path='/Account' element={<AccountPage/>} />
-        <Route path='/Account/Profile' element={<EditProfile/>} />
         <Route path='/Account/OrderHistory' element={<OrderHistory/>} />
         <Route path='/Admin' element={<Admin/>} />
         <Route path='/Admin/ManageBooks/Add' element={<AddBook/>} />
