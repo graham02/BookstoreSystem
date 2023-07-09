@@ -14,6 +14,7 @@ import Update from './AdminHome/Update';
 import AccountPage from './Account/AccountPage';
 import OrderHistory from './Account/OrderHistory';
 import Shop from './Shop/Shop';
+import View from './Shop/View';
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
         <Route path='/Login' element={<Login/>} />
         <Route path='/Signup' element={<Signup/>} />
         <Route path='/Shop' element={<Shop/>} />
+        <Route path='/View/:id' element={<View/>} />
         <Route path='/ForgotPassword' element={<ForgotPassword/>} />
         <Route path='/Account' element={<AccountPage/>} />
         <Route path='/Account/OrderHistory' element={<OrderHistory/>} />
