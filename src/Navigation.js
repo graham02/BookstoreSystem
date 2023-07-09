@@ -1,16 +1,9 @@
 import './Navigation.css';
-import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 export default function Nagivation(props)
 {
-    const [ loggedIn, setLoggedIn ] = useState(true);
-    const navigate = useNavigate();
-
-    function logout() {
-        navigate('/');
-        setLoggedIn(!loggedIn);
-    }
+    let loggedIn = false; // temp value to manually update for viewing account stuff
 
     return (<>
     <div className='nav-bar'>
@@ -32,7 +25,7 @@ export default function Nagivation(props)
                     <Link className='nav-link' to='/Account'>Account</Link>
                 </li>
                 <li key='logout'>
-                    <button className='nav-button' onClick={logout}>Logout</button>
+                    <button className='nav-button'>Logout</button>
                 </li>
                 </>    
                 :
