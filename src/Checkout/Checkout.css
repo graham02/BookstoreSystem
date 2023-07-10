@@ -1,0 +1,124 @@
+.checkout-page label {
+    font-weight: bold;
+    font-size: 1.4em;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.checkout-page input {
+    font: inherit;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 0.5rem;
+    border: 1px solid #ccc;
+    width: 90%;
+}
+
+.checkout-page hr {
+    margin-top: 16px;
+    display: block;
+    width: 96%;               
+    background-color:black;
+    height: 4px;
+}
+
+.checkout-pt0 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.checkout-pt1 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirm-shipping {
+    margin: 12px;
+    height: 100%;
+    padding: 16px;
+    background-color: #f0e9e9;
+    width: 49.5%;
+    text-align: center;
+}
+
+.confirm-shipping-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: left;
+    gap: 4em;
+}
+
+.confirm-edit-inner {
+    text-align: left;
+}
+
+.confirm-cart-total {
+    margin: 12px;
+    height: 100%;
+    padding: 16px;
+    background-color: #f0e9e9;
+    width: 49.5%;
+    text-align: center;
+}
+
+.checkout-page h1 {
+    font-size: 2em;
+    padding: 0px;
+    margin: 0px;
+    font-weight: bold;
+}
+
+.checkout-page h2 {
+    margin-top: 4em;
+    font-size: 1.6em;
+    font-weight: normal;
+}
+
+.checkout-page h3 {
+    font-size: 1.4em;
+}
+
+.checkout-page p {
+    font-size: 1em;
+}
+
+.checkout-pt2 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 20%;
+    text-align: center;
+    margin: 2em auto;
+    padding: 1.5rem;
+    background-color: #f0e9e9;
+}
+
+.confirm-checkout-btn {
+    cursor: pointer;
+    margin-top: 2rem;
+    width: 30%;
+    padding: 1rem 2rem;
+    border: 1px solid #222121;
+    background-color: #a39b9b;
+    color: #e6e6e6;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: auto;
+} 
+.confirm-checkout-btn:hover,
+.confirm-checkout-btn:active {
+    background-color: #7c7575;
+}
+.edit-checkout-btn {
+    width: 50%;
+}
+
+.next-step{
+    background-color: #2aac55;
+}
+.next-step:hover,
+.next-step:active {
+    background-color: #218d45;
+}
