@@ -15,6 +15,8 @@ import AccountPage from './Account/AccountPage';
 import OrderHistory from './Account/OrderHistory';
 import Shop from './Shop/Shop';
 import View from './Shop/View';
+import Cart from './Checkout/Cart';
+import Checkout from './Checkout/Checkout'
 
 export default function App() {
   return (
@@ -25,6 +27,8 @@ export default function App() {
         <Route path='/Signup' element={<Signup/>} />
         <Route path='/Shop' element={<Shop/>} />
         <Route path='/View/:id' element={<View/>} />
+        <Route path='/Cart' element={<Cart/>} />
+        <Route path='/Checkout' element={<Checkout/>} />
         <Route path='/ForgotPassword' element={<ForgotPassword/>} />
         <Route path='/Account' element={<AccountPage/>} />
         <Route path='/Account/OrderHistory' element={<OrderHistory/>} />
