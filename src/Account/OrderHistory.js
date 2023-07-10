@@ -55,7 +55,7 @@ export default function OrderHistory()
 
     return (<>
     <Navigation />
-    <div className='order-display'>
+    <div className='order-hist-display'>
         {dummy_data.map((order, k)=>
         <Order key={k}
             id={order.orderid}
