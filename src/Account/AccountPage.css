@@ -17,7 +17,7 @@
 }
 
 .account-form p {
-    font-size: 20px
+    font-size: 20px;
 }
 
 .account-form input {
@@ -44,6 +44,14 @@
 .account-edit-btn:hover,
 .account-edit-btn:active {
     background-color: darkgray;
+}
+.add-pay {
+    width: 40%;
+}
+.payment-opts {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .account-link {
