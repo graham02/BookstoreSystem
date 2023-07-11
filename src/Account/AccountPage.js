@@ -74,10 +74,13 @@ export default function AccountPage()
             <h1>Payment</h1>
             {(!editPaym) ?
                 <div>
-                    <p>{dummy_data.address.street1}</p>
-                    <p>{dummy_data.address.street2}</p>
-                    <p>{dummy_data.address.state}, {dummy_data.address.zip}</p>
-                    <button className='account-edit-btn' onClick={() => setEditPaym(true)}>Edit address</button>
+                    <p>{dummy_data.payment.name}</p>
+                    <p>{dummy_data.payment.card}</p>
+                    <p>Exp: {dummy_data.payment.exp}</p>
+                    <div className='payment-opts'>
+                        <button className='account-edit-btn add-pay' onClick={() => setEditPaym(true)}>Edit payment method</button>
+                        <button className='account-edit-btn add-pay' onClick={() => setEditPaym(true)}>Add payment method</button>
+                    </div>
                 </div>
                 :
                 <form onSubmit={() => setEditPaym(false)}>
