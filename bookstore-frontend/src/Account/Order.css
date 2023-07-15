@@ -1,0 +1,46 @@
+.order-details {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 12px;
+    background-color: gray;
+    color: white;
+}
+
+.order-text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 12px;
+    color: black;
+}
+
+.order-btn {
+    cursor: pointer;
+    padding: 0rem 4rem;
+    border: 1px solid #222121;
+    color: #e6e6e6;
+    border-radius: 4px;
+    font-size: 1.6em;
+}
+
+.user {
+    background-color: #424242;
+}
+.user:hover,
+.user:active {
+    background-color: #424242;
+}
+
+.order-books {
+    margin: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+}
+
+.order-cover-img {
+    border-radius: 4px;
+    width: 100%;
+    color: white;
+}

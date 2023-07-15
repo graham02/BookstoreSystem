@@ -1,0 +1,38 @@
+.shop-display {
+    margin: 12px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.search-container {
+    margin: 12px;
+}
+
+.searchbar {
+    text-align: center  ;
+    font-size: 1.6em;
+    padding: 12px 0px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 100%;
+}
+
+.search-criteria {
+    display: flex;
+    text-align: center;
+    flex-direction: row;
+    justify-content: left;
+    gap: 12px;
+}
+
+.search-criteria h3 {
+    margin: 12px;
+    font-size: 1.2em;
+}
+
+.search-criteria label {
+    margin: auto 0px;
+    font-size: 1.2em;
+    display: block;
+}
