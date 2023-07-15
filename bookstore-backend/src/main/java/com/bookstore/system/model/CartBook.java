@@ -1,0 +1,43 @@
+package com.bookstore.system.model;
+
+import jakarta.persistence.*;
+
+@Entity
+public class CartBook {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @ManyToOne
+    private Book book;
+    private int quantity;
+    @ManyToOne
+    @JoinColumn(name = "completedOrder_id")
+    private CompletedOrder completedOrder;
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBook(Book book) {
+        this.book = book;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+}
