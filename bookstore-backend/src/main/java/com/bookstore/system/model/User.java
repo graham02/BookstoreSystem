@@ -1,17 +1,22 @@
 package com.bookstore.system.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @MappedSuperclass
 public abstract class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
+    @NotBlank(message = "Name cannot be blank")
     private String name;
-
+    @NotBlank(message = "Password cannot be blank")
     private String password;
+    @NotBlank(message = "Email cannot be blank")
     private String email;
-    private int phoneNumber;
+    @NotNull(message = "Phone number cannot be blank")
+    private Integer phoneNumber;
 
     public int getUserId() {
         return userId;
@@ -45,11 +50,11 @@ public abstract class User {
         this.email = email;
     }
 
-    public int getPhoneNumber() {
+    public Integer getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 }
