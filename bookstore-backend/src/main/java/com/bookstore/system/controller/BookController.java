@@ -2,7 +2,6 @@ package com.bookstore.system.controller;
 
 import com.bookstore.system.exception.BookNotFoundException;
 import com.bookstore.system.model.Book;
-import com.bookstore.system.model.Customer;
 import com.bookstore.system.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
