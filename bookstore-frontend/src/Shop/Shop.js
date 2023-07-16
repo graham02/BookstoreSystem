@@ -25,15 +25,15 @@ export default function Shop() {
     const sortResult = (e) => {
         setSortState(e);
         if (e === "title_s") {
-            setBooks(books.sort((a, b) => a.title.localeCompare(b.title)));
+            setSortedBooks(books.sort((a, b) => a.title.localeCompare(b.title)));
         }
 
         if (e === "priceh") {
-            setBooks(books.sort((a, b) => b.price - a.price));
+            setSortedBooks(books.sort((a, b) => b.price - a.price));
         }
 
         if (e === "pricel") {
-            setBooks(books.sort((a, b) => a.price - b.price));
+            setSortedBooks(books.sort((a, b) => a.price - b.price));
         }
     }
 
