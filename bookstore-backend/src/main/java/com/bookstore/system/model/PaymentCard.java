@@ -45,4 +45,12 @@ public class PaymentCard {
     public void setExpDate(String expDate) {
         this.expDate = expDate;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
