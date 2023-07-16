@@ -25,9 +25,9 @@ public class CompletedOrder {
     private Customer customer;
     @OneToMany(mappedBy = "completedOrder")
     private Set<CartBook> orderedBooks;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private PaymentCard paymentCard;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
     public int getOrderId() {
