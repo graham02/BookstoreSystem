@@ -1,6 +1,7 @@
 package com.bookstore.system.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import jdk.jfr.Name;
 
 @Entity
@@ -8,8 +9,11 @@ public class PaymentCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "Card number cannot be blank")
     private String card;
+    @NotBlank(message = "Name on card cannot be blank")
     private String cardOwner;
+    @NotBlank(message = "Expiration date cannot be blank")
     private String expDate;
     @ManyToOne
     @JoinColumn(name = "customer_id")
