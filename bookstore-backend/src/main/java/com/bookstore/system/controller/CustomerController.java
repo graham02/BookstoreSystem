@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -18,7 +17,11 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     @PostMapping("/api/signup")
+    @PostMapping("/api/signup")
     ResponseEntity<String> newCustomer(@Valid @RequestBody Customer newCustomer) {
+        newCustomer.setCustomerState(Customer.CUSTOMER_STATE.INACTIVE);
+        // TODO: add password encryption
+        // TODO: send verification email
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Account Created");
