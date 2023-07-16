@@ -1,62 +1,110 @@
 import './Shop.css';
+import axios from 'axios';
+import { useState, useEffect } from 'react';
 import Book from '../Book';
 import Navigation from '../Navigation';
-import { useEffect, useState } from 'react';
 
-export default function Shop() 
-{
-    const API = 'http://localhost:8080/api/books';
+export default function Shop() {
     const [books, setBooks] = useState([]);
-    useEffect(() => {
-        fetch(API).then(response => { 
-            if(response.ok) { 
-                return response.json();
-            }
-            throw response;
-        }).then(data => {
-            setBooks(data);
-        }).catch(error => {
-            console.error(error);
-        })
-    }, [books]);
+    const [sortedBooks, setSortedBooks] = useState(null);
+    const [sortState, setSortState] = useState("title_s");
+    const [checkState, setCheckState] = useState("title");
+
+    function fetch() {
+        axios
+            .get('http://localhost:8080/api/books')
+            .then((res) => {
+                setBooks(res.data.sort((a, b) => a.title.localeCompare(b.title)));
+            })
+            .catch((err) => {
+                console.log('Error getting items');
+            });
+    }
+    useEffect(fetch, []);
+
+    const sortResult = (e) => {
+        setSortState(e);
+        if (e === "title_s") {
+            setBooks(books.sort((a, b) => a.title.localeCompare(b.title)));
+        }
+
+        if (e === "priceh") {
+            setBooks(books.sort((a, b) => b.price - a.price));
+        }
+
+        if (e === "pricel") {
+            setBooks(books.sort((a, b) => a.price - b.price));
+        }
+    }
+
+    const handleSearch = (e) => {
+        var temp = null;
+        if (checkState === "title") {
+            temp = books.filter((el) => el.title.toLowerCase().includes(e.target.value.toLowerCase()));
+        }
+
+        if (checkState === "author") {
+            temp = books.filter((el) => el.author.toLowerCase().includes(e.target.value.toLowerCase()));
+        }
+
+        if (checkState === "genre") {
+            temp = books.filter((el) => el.category.toLowerCase().includes(e.target.value.toLowerCase()));
+        }
+
+        // Sort by
+        if (sortState === "title_s") {
+            temp = temp.sort((a, b) => a.title.localeCompare(b.title));
+        }
+
+        if (sortState === "priceh") {
+            temp = temp.sort((a, b) => b.price - a.price);
+        }
+
+        if (sortState === "pricel") {
+            temp = temp.sort((a, b) => a.price - b.price);
+        }
+
+        setSortedBooks(temp);
+    }
 
     return (<>
-    <Navigation />
-    <div className='search-container'>
-        <input className='searchbar' type='text' placeholder='Search'/>
+        <Navigation />
+        <div className='search-container'>
+            <input className='searchbar' type='text' placeholder='Search' onChange={handleSearch}></input>
 
-        <div className='search-criteria'>
-            <h3>Search by:</h3>
-            <input type="checkbox" id="genre" name="genre" />
-            <label for="genre">Genre</label>
-            <input type="checkbox" id="author" name="author" />
-            <label for="author">Author</label>
-            <input type="checkbox" id="title" name="title" />
-            <label for="title">Title</label>
+            <div className='search-criteria'>
+                <h3>Search by:</h3>
+                <input type="radio" id="title" name="title" checked={checkState === "title"} onChange={(e) => setCheckState(e.target.id)} />
+                <label htmlFor="title">Title</label>
+                <input type="radio" id="author" name="author" checked={checkState === "author"} onChange={(e) => setCheckState(e.target.id)} />
+                <label htmlFor="author">Author</label>
+                <input type="radio" id="genre" name="genre" checked={checkState === "genre"} onChange={(e) => setCheckState(e.target.id)} />
+                <label htmlFor="genre">Genre</label>
 
-            <h3>Sort by:</h3>
-            <input type="checkbox" id="priceh" name="priceh" />
-            <label for="priceh">Price (high-low)</label>
-            <input type="checkbox" id="pricel" name="pricel" />
-            <label for="pricel">Price (low-high)</label>
-            <input type="checkbox" id="title_s" name="title_s" />
-            <label for="title_s">Title (a-z)</label>
+
+                <h3>Sort by:</h3>
+                <input type="radio" id="title_s" name="sort" checked={sortState === "title_s"} onChange={(e) => sortResult(e.target.id)} />
+                <label htmlFor="title_s">Title (a-z)</label>
+                <input type="radio" id="priceh" name="sort" checked={sortState === "priceh"} onChange={(e) => sortResult(e.target.id)} />
+                <label htmlFor="priceh">Price (high-low)</label>
+                <input type="radio" id="pricel" name="sort" checked={sortState === "pricel"} onChange={(e) => sortResult(e.target.id)} />
+                <label htmlFor="pricel">Price (low-high)</label>
+            </div>
         </div>
-    </div>
 
-    <div className='shop-display'>
-        {books.map((book, k)=>
-        <Book key={k}
-            title={book.title}
-            author={book.author}
-            cover={book.coverURL}
-            rating={book.rating}
-            price={book.price}
-            isbn={book.isbn}
-            desc={book.desc}
-            genre={book.genre}
-        />
-    )}</div>
+        <div className='shop-display'>
+            {(sortedBooks === null ? books : sortedBooks).map((book, k) =>
+                <Book key={k}
+                    title={book.title}
+                    author={book.author}
+                    cover={book.coverURL}
+                    rating={book.rating}
+                    price={book.price}
+                    isbn={book.isbn}
+                    desc={book.description}
+                    genre={book.category}
+                />
+            )}</div>
     </>);
 }
 
