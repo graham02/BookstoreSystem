@@ -11,14 +11,14 @@ export default function Home()
                 <h1>Featured</h1>
                 <hr></hr>
                 <div>
-                    <Featured cat='Featured'/>
+                    <Featured cat='FEATURED'/>
                 </div>
             </div>
             <div className='featured-section'>
                 <h1>Top Sellers</h1>
                 <hr></hr>
                 <div>
-                    <Featured cat='Top Sellers'/>
+                    <Featured cat='TOP_SELLER'/>
                 </div>  
             </div>
         </div>
