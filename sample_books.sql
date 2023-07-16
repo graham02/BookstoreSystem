@@ -34,7 +34,7 @@ VALUES
 0,
 "Young Adult",
 "https://s26162.pcdn.co/wp-content/uploads/2018/10/invisibleman-1509049531-640x996.jpg",
-"NATIONAL BOOK AWARD WINNER • NATIONAL BESTSELLER • In this deeply compelling novel and epic milestone of American literature, a nameless narrator tells his story from the basement lair of the Invisible Man he imagines himself to be.",
+"In this deeply compelling novel and epic milestone of American literature, a nameless narrator tells his story from the basement lair of the Invisible Man he imagines himself to be.",
 100,
 "978-0679732761",
 12.51,
@@ -76,9 +76,7 @@ VALUES
 0,
 "Young Adult",
 "https://m.media-amazon.com/images/I/91pIF5zxBVL._AC_UF1000,1000_QL80_.jpg",
-"From the New York Times bestselling author of Parable of the Sower and MacArthur “Genius” Grant, Nebula, and Hugo award winner 
-
-“I lost an arm on my last trip home. My left arm.”
+"“I lost an arm on my last trip home. My left arm.”
 
 Dana’s torment begins when she suddenly vanishes on her 26th birthday from California, 1976, and is dragged through time to antebellum Maryland to rescue a boy named Rufus, heir to a slaveowner’s plantation. She soon realizes the purpose of her summons to the past: protect Rufus to ensure his assault of her Black ancestor so that she may one day be born. As she endures the traumas of slavery and the soul-crushing normalization of savagery, Dana fights to keep her autonomy and return to the present.",
 100,
@@ -94,9 +92,7 @@ Dana’s torment begins when she suddenly vanishes on her 26th birthday from Cal
 1,
 "Young Adult",
 "https://storage.googleapis.com/du-prd/books/images/9780593374160.jpg",
-"#1 NEW YORK TIMES BESTSELLER • From the author of the multimillion-copybestselling A Good Girl’s Guide to Murder series comes a new blockbuster thriller about a road trip that turns deadly.
-
-Eight hours. Six friends. Five survive.
+"Eight hours. Six friends. Five survive.
 
 Red Kenny is on a road trip for spring break with five friends: Her best friend - the older brother - his perfect girlfriend - a secret crush - a classmate - and a killer. 
 
@@ -162,9 +158,7 @@ Told with acclaimed author Adam Silvera’s signature bittersweet touch, this st
 2, 
 "Young Adult",
 "https://storage.googleapis.com/du-prd/books/images/9781419760860.jpg",
-"An instant #1 National Bestseller—soon to be a major motion picture. #BookTok phenomenon and award-winning author Alex Aster delivers readers a masterfully written, utterly gripping YA fantasy novel
-
-Welcome to the Centennial.
+"Welcome to the Centennial.
 
 Every 100 years, the island of Lightlark appears to host the Centennial, a deadly game that only the rulers of six realms are invited to play. The invitation is a summons—a call to embrace victory and ruin, baubles and blood. The Centennial offers the six rulers one final chance to break the curses that have plagued their realms for centuries. Each ruler has something to hide. Each realm’s curse is uniquely wicked. To destroy the curses, one ruler must die.
 
@@ -184,9 +178,7 @@ To survive, Isla must lie, cheat, and betray…even as love complicates everythi
 1,
 "Young Adult",
 "https://storage.googleapis.com/du-prd/books/images/9781250766588.jpg",
-"#1 New York Times bestselling author of Firekeeper's Daughter Angeline Boulley takes us back to Sugar Island in this high-stakes thriller about the power of discovering your stolen history.
-
-Perry Firekeeper-Birch has always known who she is - the laidback twin, the troublemaker, the best fisher on Sugar Island. Her aspirations won't ever take her far from home, and she wouldn't have it any other way. But as the rising number of missing Indigenous women starts circling closer to home, as her family becomes embroiled in a high-profile murder investigation, and as greedy grave robbers seek to profit off of what belongs to her Anishinaabe tribe, Perry begins to question everything.
+"Perry Firekeeper-Birch has always known who she is - the laidback twin, the troublemaker, the best fisher on Sugar Island. Her aspirations won't ever take her far from home, and she wouldn't have it any other way. But as the rising number of missing Indigenous women starts circling closer to home, as her family becomes embroiled in a high-profile murder investigation, and as greedy grave robbers seek to profit off of what belongs to her Anishinaabe tribe, Perry begins to question everything.
 
 In order to reclaim this inheritance for her people, Perry has no choice but to take matters into her own hands. She can only count on her friends and allies, including her overachieving twin and a charming new boy in town with unwavering morals. Old rivalries, sister secrets, and botched heists cannot - will not - stop her from uncovering the mystery before the ancestors and missing women are lost forever.
 
