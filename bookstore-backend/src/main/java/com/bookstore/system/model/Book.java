@@ -17,11 +17,15 @@ public class Book {
     private String isbn;
     private String category;
     private String title;
+    private String author;
+    @Column(length = 1600)
+    private String description;
     private String coverURL;
     private String publisher;
     private String publicationYear;
     private int inStock;
-    private int price;
+    private double price;
+    private double rating;
     private BOOK_TYPE bookType;
 
     public int getId() {
@@ -88,10 +92,6 @@ public class Book {
         this.inStock = inStock;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
     public void setPrice(int price) {
         this.price = price;
     }
@@ -103,4 +103,36 @@ public class Book {
     public void setBookType(BOOK_TYPE bookType) {
         this.bookType = bookType;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    public double getPrice() {
+        return price;
+    }
+
 }
