@@ -1,16 +1,22 @@
 package com.bookstore.system.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @NotBlank(message = "Street cannot be blank")
     private String street;
+    @NotBlank(message = "City cannot be blank")
     private String city;
+    @NotBlank(message = "State cannot be blank")
     private String state;
-    private int zipcode;
+    @NotNull(message = "Zip code cannot be blank")
+    private Integer zipcode;
 
 
     public int getId() {
@@ -45,11 +51,11 @@ public class Address {
         this.state = state;
     }
 
-    public int getZipcode() {
+    public Integer getZipcode() {
         return zipcode;
     }
 
-    public void setZipcode(int zipcode) {
+    public void setZipcode(Integer zipcode) {
         this.zipcode = zipcode;
     }
 }
