@@ -13,16 +13,16 @@ public class Customer extends User {
     }
 
     private CUSTOMER_STATE customerState;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Address address;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<PaymentCard> paymentCards;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Cart cart;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL)
     private Set<CompletedOrder> completedOrders;
 
     public CUSTOMER_STATE getCustomerState() {
