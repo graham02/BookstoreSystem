@@ -85,4 +85,12 @@ public class CompletedOrder {
     public void setAddress(Address address) {
         this.address = address;
     }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
 }
