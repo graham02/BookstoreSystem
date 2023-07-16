@@ -1,9 +1,11 @@
 import './Navigation.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Nagivation(props)
 {
-    let loggedIn = false; // temp value to manually update for viewing account stuff
+    const key = 'auth';
+    let loggedIn = sessionStorage.getItem(key) || false; // temp value to manually update for viewing account stuff
+    const navigate = useNavigate();
 
     return (<>
     <div className='nav-bar'>
@@ -25,7 +27,7 @@ export default function Nagivation(props)
                     <Link className='nav-link' to='/Account'>Account</Link>
                 </li>
                 <li key='logout'>
-                    <button className='nav-button'>Logout</button>
+                    <button className='nav-button' onClick={() => {sessionStorage.removeItem(key); navigate('/')}}>Logout</button>
                 </li>
                 </>    
                 :
