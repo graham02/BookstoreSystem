@@ -18,12 +18,26 @@ public class CustomerController {
 
     @PostMapping("/api/signup")
     ResponseEntity<String> newCustomer(@Valid @RequestBody Customer newCustomer) {
+        if (customerRepository.findByEmail(newCustomer.getEmail()) != null)
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Account already exists");
+
+        // new customers must be verified via email
         newCustomer.setCustomerState(Customer.CUSTOMER_STATE.INACTIVE);
-        // TODO: add password encryption
+
+        // create a cart for the customer
+        newCustomer.setCart(new Cart());
+
+        // ensure password length > 6
         if (newCustomer.getPassword().length() < 6)
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Password too short");
+
+        // encrypt their password
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        newCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
 
         // TODO: send verification email
 
@@ -36,19 +50,34 @@ public class CustomerController {
                     .status(HttpStatus.BAD_REQUEST)
                     .body("Invalid email");
 
-        // account created ok
+        // save customer in database
+        customerRepository.save(newCustomer);
+
+        // account creation success
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body("Account Created");
     }
 
-    @GetMapping("/api/customers")
-    List<Customer> getAllCustomers() {
-        return customerRepository.findAll();
-    }
+    @PostMapping("/api/login")
+    ResponseEntity<String> userLogin(@Valid @RequestBody Login login) {
+        Customer customer = customerRepository.findByEmail(login.getEmail());
 
-    @GetMapping("/api/customer")
-    Customer getCustomer(@RequestParam String email) {
-        return customerRepository.findByEmail(email);
+        if (customer != null) {
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            boolean isMatch = passwordEncoder.matches(login.getPassword(), customer.getPassword());
+
+            if (isMatch)
+                return ResponseEntity
+                        .status(HttpStatus.OK)
+                        .body("Login success");
+            else
+                return ResponseEntity
+                        .status(HttpStatus.BAD_REQUEST)
+                        .body("Invalid credentials");
+        } else
+            return ResponseEntity
+                    .status(HttpStatus.BAD_REQUEST)
+                    .body("Account not found");
     }
 }
