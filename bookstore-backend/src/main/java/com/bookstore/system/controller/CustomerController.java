@@ -2,9 +2,13 @@ package com.bookstore.system.controller;
 
 import com.bookstore.system.model.Customer;
 import com.bookstore.system.repository.CustomerRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
@@ -13,12 +17,14 @@ public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
 
-    @PostMapping("/api/user")
-    Customer newCustomer(@RequestBody Customer newCustomer) {
-        return customerRepository.save(newCustomer);
+    @PostMapping("/api/signup")
+    ResponseEntity<String> newCustomer(@Valid @RequestBody Customer newCustomer) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body("Account Created");
     }
 
-    @GetMapping("/api/users")
+    @GetMapping("/api/customers")
     List<Customer> getAllCustomers() {
         return customerRepository.findAll();
     }
