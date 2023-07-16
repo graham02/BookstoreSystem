@@ -31,8 +31,8 @@ export default function View(props)
             <h2>By: {book.author}</h2>
             <hr className='top-hr'/>
 
-            <p><b>Description:</b> {book.desc}</p>
-            <p><b>ISBN:</b> {book.isbn}</p>
+            <p>{book.desc}</p>
+            <p><br/><br/><b>ISBN:</b> {book.isbn}</p>
             <p><b>Genre:</b> {book.genre}</p>
 
             <hr className='top-hr bottom-hr'/>
