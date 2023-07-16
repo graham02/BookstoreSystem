@@ -40,4 +40,20 @@ public class CartBook {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+
+    public CompletedOrder getCompletedOrder() {
+        return completedOrder;
+    }
+
+    public void setCompletedOrder(CompletedOrder completedOrder) {
+        this.completedOrder = completedOrder;
+    }
+
+    public Cart getCart() {
+        return cart;
+    }
+
+    public void setCart(Cart cart) {
+        this.cart = cart;
+    }
 }
