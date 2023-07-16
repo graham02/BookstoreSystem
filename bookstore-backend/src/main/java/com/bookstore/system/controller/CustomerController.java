@@ -12,7 +12,7 @@ import java.net.http.HttpResponse;
 import java.util.List;
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000")
 public class CustomerController {
     @Autowired
     private CustomerRepository customerRepository;
@@ -27,5 +27,10 @@ public class CustomerController {
     @GetMapping("/api/customers")
     List<Customer> getAllCustomers() {
         return customerRepository.findAll();
+    }
+
+    @GetMapping("/api/customer")
+    Customer getCustomer(@RequestParam String email) {
+        return customerRepository.findByEmail(email);
     }
 }
