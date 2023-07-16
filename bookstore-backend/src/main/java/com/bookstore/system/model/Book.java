@@ -91,10 +91,7 @@ public class Book {
     public void setInStock(int inStock) {
         this.inStock = inStock;
     }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
+    
 
     public BOOK_TYPE getBookType() {
         return bookType;
@@ -134,5 +131,4 @@ public class Book {
     public double getPrice() {
         return price;
     }
-
 }
