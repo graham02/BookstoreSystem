@@ -8,6 +8,10 @@
     background-color: #f0e9e9;
 }
 
+.login-for-account {
+    text-align: center;
+}
+
 .account-form hr {
     margin-top: 16px;
     display: block;
