@@ -121,6 +121,7 @@ public class CustomerController {
         return ResponseEntity.badRequest().body("Account doesn't exist");
     }
 
+    
     @PostMapping("/api/login")
     ResponseEntity<String> userLogin(@Valid @RequestBody Login login) {
         Customer customer = customerRepository.findByEmail(login.getEmail());
@@ -131,7 +132,7 @@ public class CustomerController {
 
             if (isMatch) {
                 if(customer.getCustomerState() == Customer.CUSTOMER_STATE.ACTIVE)
-                    return ResponseEntity.ok().body("Customer");
+                    return ResponseEntity.ok().body(customer.getVerificationToken());
                 if(customer.getCustomerState() == Customer.CUSTOMER_STATE.INACTIVE)
                     return ResponseEntity.status(403).body("Account not activated");
             }
