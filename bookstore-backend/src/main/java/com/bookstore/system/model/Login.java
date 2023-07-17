@@ -7,6 +7,7 @@ public class Login {
     private String email;
     @NotBlank(message = "Password cannot be blank")
     private String password;
+    private boolean rememberMe = false;
 
     public String getEmail() {
         return email;
@@ -22,5 +23,13 @@ public class Login {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
     }
 }
