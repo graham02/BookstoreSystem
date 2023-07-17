@@ -138,4 +138,13 @@ public class CustomerController {
         }
         return ResponseEntity.badRequest().body("Invalid Credentials");
     }
+
+    @GetMapping("/api/profile/:{email}")
+    public ResponseEntity<?> getCustomerProfile(@PathVariable String email) {
+        Customer customer = customerRepository.findByEmail(email);
+
+        if (customer != null)
+            return ResponseEntity.ok().body(customer);
+        return ResponseEntity.badRequest().body("Invalid Credentials");
+    }
 }
