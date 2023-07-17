@@ -11,21 +11,26 @@ export default function ResetPassword()
     const token = useParams().token;
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
-    const [password, setPassword] = useState('');
     const API = 'http://localhost:8080/verify-reset';
-    const [message, setMessage] = useState('');
+    const [message, setMessage] = useState('Email being sent...');
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(password.length < 6) {
+        if (e.target.password1.value !== e.target.password2.value) {
+            alert('Passwords must match')
+            return;
+        }
+
+        if(e.target.password1.value.length < 6) {
             alert("Password too short");
             return;
         }
+
         console.log(token);
         axios.post(API, null, {
             params: {
                 token: token,
-                password: password
+                password: e.target.password1.value
             }
         }).then((res) => {
             if(res.status === 200) {
@@ -34,6 +39,7 @@ export default function ResetPassword()
                 alert("This shouldn't happen");
             }
         }).catch((err) => {
+            console.log(err.response.data);
             setMessage("Something went wrong. Password wasn't changed.");
         })
 
@@ -53,8 +59,12 @@ export default function ResetPassword()
             :
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label>Password:</label>
-                    <input type='text' required onChange={(e) => setPassword(e.target.value)}/>
+                    <label>New Password:</label>
+                    <input type='password' required name='password1'/>
+                </div>
+                <div>
+                    <label>Confirm Password:</label>
+                    <input type='password' required name='password2'/>
                 </div>
                 <div className='login-btn'>
                     <button type='submit'>Reset Password</button>
