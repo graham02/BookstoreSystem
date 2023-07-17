@@ -24,7 +24,6 @@ public class CustomerController {
     @Autowired
     EmailService emailService;
 
-
     @PostMapping("/api/signup")
     ResponseEntity<String> newCustomer(@Valid @RequestBody Customer newCustomer) {
         if (customerRepository.findByEmail(newCustomer.getEmail()) != null)
@@ -44,15 +43,6 @@ public class CustomerController {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         newCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
 
-        // send verification email
-        newCustomer.setConfirmationToken(UUID.randomUUID().toString());
-
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
-        mailMessage.setTo(newCustomer.getEmail());
-        mailMessage.setSubject("Complete Registration!");
-        mailMessage.setText("To confirm your account, please click here : "
-                +"http://localhost:8080/verify-account?token="+newCustomer.getVerificationToken());
-        emailService.sendEmail(mailMessage);
 
         // email validation
         // regex source: https://www.baeldung.com/java-email-validation-regex
@@ -60,6 +50,17 @@ public class CustomerController {
                 .matcher(newCustomer.getEmail())
                 .matches())
             return ResponseEntity.badRequest().body("Invalid email");
+        
+        // add verification token
+        newCustomer.setConfirmationToken(UUID.randomUUID().toString());
+
+        // send verification email
+        SimpleMailMessage mailMessage = new SimpleMailMessage();
+        mailMessage.setTo(newCustomer.getEmail());
+        mailMessage.setSubject("Complete Registration!");
+        mailMessage.setText("To confirm your account, please click here : "
+                +"http://localhost:8080/verify-account?token="+newCustomer.getVerificationToken());
+        emailService.sendEmail(mailMessage);
 
         // save customer in database
         customerRepository.save(newCustomer);
@@ -80,7 +81,7 @@ public class CustomerController {
         }
         return ResponseEntity.badRequest().body("Account doesn't exist");
     }
-
+    
     @PostMapping("/api/login")
     ResponseEntity<String> userLogin(@Valid @RequestBody Login login) {
         Customer customer = customerRepository.findByEmail(login.getEmail());
@@ -90,16 +91,10 @@ public class CustomerController {
             boolean isMatch = passwordEncoder.matches(login.getPassword(), customer.getPassword());
 
             if (isMatch)
-                return ResponseEntity
-                        .status(HttpStatus.OK)
-                        .body("Login success");
+                return ResponseEntity.ok().body("Login success");
             else
-                return ResponseEntity
-                        .status(HttpStatus.BAD_REQUEST)
-                        .body("Invalid credentials");
+                return ResponseEntity.badRequest().body("Invalid login credentials");
         } else
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("Account not found");
+            return ResponseEntity.badRequest().body("Account not found");
     }
 }
