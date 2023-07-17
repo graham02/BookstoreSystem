@@ -37,7 +37,7 @@ public class AdminController {
         return ResponseEntity.badRequest().body("Invalid Credentials");
     }
 
-    @GetMapping("/api/admin")
+    @GetMapping("/exists/admin")
     public ResponseEntity<?> doesAdminExist(@RequestParam("token") String token) {
         Admin admin = adminRepository.findByVerificationToken(token);
 

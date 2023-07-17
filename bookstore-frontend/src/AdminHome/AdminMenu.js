@@ -9,7 +9,7 @@ export default function Nagivation()
     const navigate = useNavigate();
     const [admin, setAdminStatus] = useState(false);
 
-    const API = 'http://localhost:8080/api/admin';
+    const API = 'http://localhost:8080/exists/admin';
 
 
     function checkAdminStatus() {

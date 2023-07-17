@@ -1,11 +1,32 @@
 import './AccountPage.css';
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navigation from '../Navigation';
 import Card from '../Card'
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 export default function AccountPage() 
 {
+    ////////////////////////////////////////////////////////////////
+    // Redirects user away if not logged in.
+    const key = 'auth';
+    const API = 'http://localhost:8080/exists/';
+    const navigate = useNavigate();
+    useEffect(() => {
+        // Checking session/local storage for a token and verifying it matches to someone
+        axios.get(API + "customer", // Check for customer
+            { params: {token: localStorage.getItem(key) || sessionStorage.getItem(key)}
+        }).catch(() => {
+            axios.get(API + "admin", // If customer didn't exist, check for admin
+                { params: {token: localStorage.getItem(key) || sessionStorage.getItem(key)}
+            }).catch(() => {
+                navigate(-1); // If neither exists, redirect away
+            });
+        });
+    }, [navigate])
+    ////////////////////////////////////////////////////////////////
+
     const [ editInfo, setEditInfo ] = useState(false);
     const [ editPaym, setEditPaym ] = useState(false);
     const [ editAddr, setEditAddr ] = useState(false);

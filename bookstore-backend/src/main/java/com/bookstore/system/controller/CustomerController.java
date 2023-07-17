@@ -177,4 +177,12 @@ public class CustomerController {
             return ResponseEntity.ok().body(customer);
         return ResponseEntity.badRequest().body("Invalid Credentials");
     }
+
+    @GetMapping("/exists/customer")
+    public ResponseEntity<?> doesCustomerExist(@RequestParam("token") String token) {
+        Customer customer = customerRepository.findByVerificationToken(token);
+        if (customer != null)
+            return ResponseEntity.ok().body("customer exists");
+        return ResponseEntity.badRequest().body("Invalid Credentials");
+    }
 }
