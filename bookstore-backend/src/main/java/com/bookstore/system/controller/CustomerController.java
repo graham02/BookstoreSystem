@@ -127,12 +127,14 @@ public class CustomerController {
         if(customer != null) {
             customer.setConfirmationToken(UUID.randomUUID().toString());
             customerRepository.save(customer);
+
             SimpleMailMessage mailMessage = new SimpleMailMessage();
             mailMessage.setTo(customer.getEmail());
             mailMessage.setSubject("Reset your password");
             mailMessage.setText("To reset your password, please click here : "
                     +"http://localhost:3000/ResetPassword/"+customer.getVerificationToken());
             emailService.sendEmail(mailMessage);
+
         }
         return ResponseEntity.ok().body("Request Received");
     }
@@ -146,7 +148,15 @@ public class CustomerController {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             customer.setPassword(passwordEncoder.encode(password));
             customerRepository.save(customer);
+
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setTo(customer.getEmail());
+            mailMessage.setSubject("Your password has been changed");
+            mailMessage.setText("Your password has successfully been changed");
+            emailService.sendEmail(mailMessage);
+
             return ResponseEntity.ok().body("Password changed");
+            
         }
         return ResponseEntity.badRequest().body("Error setting password");
     }
