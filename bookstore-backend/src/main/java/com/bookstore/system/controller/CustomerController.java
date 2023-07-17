@@ -3,10 +3,12 @@ package com.bookstore.system.controller;
 import com.bookstore.system.model.Cart;
 import com.bookstore.system.model.Customer;
 import com.bookstore.system.model.Login;
+import com.bookstore.system.model.PaymentCard;
 import com.bookstore.system.repository.CustomerRepository;
 import com.bookstore.system.service.EmailService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -43,6 +45,17 @@ public class CustomerController {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         newCustomer.setPassword(passwordEncoder.encode(newCustomer.getPassword()));
 
+        // encrypt their card number
+        for (PaymentCard card : newCustomer.getPaymentCards())
+        {
+            if (!card.getCardNumber().matches("\\d+"))
+                return ResponseEntity.badRequest().body("Card number invalid");
+
+            card.setLastFour(
+                    card.getCardNumber().substring(card.getCardNumber().length() - 4)
+            );
+            card.setCardNumber(passwordEncoder.encode(card.getCardNumber()));
+        }
 
         // email validation
         // regex source: https://www.baeldung.com/java-email-validation-regex
@@ -50,7 +63,7 @@ public class CustomerController {
                 .matcher(newCustomer.getEmail())
                 .matches())
             return ResponseEntity.badRequest().body("Invalid email");
-        
+
         // add verification token
         newCustomer.setConfirmationToken(UUID.randomUUID().toString());
 
@@ -107,7 +120,7 @@ public class CustomerController {
         }
         return ResponseEntity.badRequest().body("Account doesn't exist");
     }
-    
+
     @PostMapping("/api/login")
     ResponseEntity<String> userLogin(@Valid @RequestBody Login login) {
         Customer customer = customerRepository.findByEmail(login.getEmail());
@@ -116,9 +129,9 @@ public class CustomerController {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             boolean isMatch = passwordEncoder.matches(login.getPassword(), customer.getPassword());
 
-            if (isMatch){
+            if (isMatch) {
                 if(customer.getCustomerState() == Customer.CUSTOMER_STATE.ACTIVE)
-                    return ResponseEntity.ok().body("Login success");
+                    return ResponseEntity.ok().body("Customer");
                 if(customer.getCustomerState() == Customer.CUSTOMER_STATE.INACTIVE)
                     return ResponseEntity.status(403).body("Account not activated");
             }
