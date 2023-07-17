@@ -15,9 +15,8 @@ export default function ForgotPassword()
         e.preventDefault();
 
 
-        axios.post(API, {
-            email: email
-        }).then((res) => {
+        axios.post(API, null, { params: {email: email}
+    }).then((res) => {
             if(res.status === 200) {
                 setMessage("Reset email sent if account exists");
             } else {

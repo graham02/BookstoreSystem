@@ -8,11 +8,11 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ResetPassword()
 {
-    const token = useParams();
+    const token = useParams().token;
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const [password, setPassword] = useState('');
-    const API = 'http://localhost:8080/api/verify-reset';
+    const API = 'http://localhost:8080/verify-reset';
     const [message, setMessage] = useState('');
 
     const handleSubmit = (e) => {
@@ -21,10 +21,12 @@ export default function ResetPassword()
             alert("Password too short");
             return;
         }
-
-        axios.post(API, {
-            token: token,
-            password: password
+        console.log(token);
+        axios.post(API, null, {
+            params: {
+                token: token,
+                password: password
+            }
         }).then((res) => {
             if(res.status === 200) {
                 setMessage("Password changed");
