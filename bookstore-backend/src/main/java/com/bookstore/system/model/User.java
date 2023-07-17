@@ -18,6 +18,8 @@ public abstract class User {
     @NotNull(message = "Phone number cannot be blank")
     private Integer phoneNumber;
 
+    private String verificationToken;
+
     public int getUserId() {
         return userId;
     }
@@ -56,5 +58,13 @@ public abstract class User {
 
     public void setPhoneNumber(Integer phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getVerificationToken() {
+        return verificationToken;
+    }
+
+    public void setConfirmationToken(String verificationToken) {
+        this.verificationToken = verificationToken;
     }
 }
