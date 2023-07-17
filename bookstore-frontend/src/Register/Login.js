@@ -36,7 +36,28 @@ export default function Login()
             if(err.response.status === 403) {
                 alert("Activate your account.");
             } else {
-                alert("Invalid credentials");
+                axios.post(API + "/admin", {
+                    email: email,
+                    password: password
+                }).then((res) => {
+                    if(res.status === 200) {
+                        if(rememberUser) {
+                            localStorage.setItem(key, res.data);
+                        } else {
+                            sessionStorage.setItem(key, res.data);
+                        }
+                        navigate('/');
+                    } else {
+                        alert("This shouldn't happen");
+                    }
+                }).catch((err) => {
+                    console.log(err);
+                    if(err.response.status === 403) {
+                        alert("Activate your account.");
+                    } else {
+                        alert("Invalid credentials");
+                    }
+                });
             }
         });
 

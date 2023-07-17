@@ -1,6 +1,5 @@
 package com.bookstore.system.repository;
 import com.bookstore.system.model.Admin;
-import com.bookstore.system.model.Customer;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
