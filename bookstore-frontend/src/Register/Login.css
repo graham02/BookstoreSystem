@@ -9,6 +9,10 @@
     background-color: #f0e9e9;
 }
  
+.login-error {
+    text-align: center;
+}
+
 .login-page label {
     font-weight: bold;
     font-size: 1.4em;
@@ -75,3 +79,7 @@
     color: blue;
 }
 
+.logout {
+    margin: auto;
+    width: 20%
+}
