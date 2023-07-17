@@ -23,9 +23,9 @@ export default function Login()
         }).then((res) => {
             if(res.status === 200) {
                 if(rememberUser) {
-                    localStorage.setItem(key, 1);
+                    localStorage.setItem(key, res.data);
                 } else {
-                    sessionStorage.setItem(key, 1);
+                    sessionStorage.setItem(key, res.data);
                 }
                 navigate('/');
             } else {
@@ -38,7 +38,7 @@ export default function Login()
             } else {
                 alert("Invalid credentials");
             }
-        })
+        });
 
     }
 
