@@ -10,27 +10,31 @@ export default function Login()
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
-    const API = 'http://localhost:8080/api/customer?email=';
+    const API = 'http://localhost:8080/api/login';
     const key = 'auth';
 
     function handleSubmit(e) {
         e.preventDefault();
 
-        axios
-        .get(API + email)
-        .then((res) => {
-            if(res.data.customerState !== 'ACTIVE') {
-                alert("Activate your account");
-            } else if (password === res.data.password) {
+        axios.post(API, {
+            email: email,
+            password: password
+        }).then((res) => {
+            if(res.status === 200) {
                 sessionStorage.setItem(key, 1);
                 navigate('/');
             } else {
-                alert("Invalid email or password");
+                alert("This shouldn't happen");
+            }
+        }).catch((err) => {
+            console.log(err);
+            if(err.response.status === 403) {
+                alert("Activate your account.");
+            } else {
+                alert("Invalid credentials");
             }
         })
-        .catch((err) => {
-            console.log('Error getting items');
-        });
+
     }
 
     return (<>

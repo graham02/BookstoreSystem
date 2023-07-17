@@ -90,11 +90,13 @@ public class CustomerController {
             BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             boolean isMatch = passwordEncoder.matches(login.getPassword(), customer.getPassword());
 
-            if (isMatch)
-                return ResponseEntity.ok().body("Login success");
-            else
-                return ResponseEntity.badRequest().body("Invalid login credentials");
-        } else
-            return ResponseEntity.badRequest().body("Account not found");
+            if (isMatch){
+                if(customer.getCustomerState() == Customer.CUSTOMER_STATE.ACTIVE)
+                    return ResponseEntity.ok().body("Login success");
+                if(customer.getCustomerState() == Customer.CUSTOMER_STATE.INACTIVE)
+                    return ResponseEntity.status(403).body("Account not activated");
+            }
+        }
+        return ResponseEntity.badRequest().body("Invalid Credentials");
     }
 }

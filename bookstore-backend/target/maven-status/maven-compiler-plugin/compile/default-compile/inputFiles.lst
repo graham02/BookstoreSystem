@@ -13,6 +13,7 @@ C:\Users\pixle\Desktop\Codebase\BookstoreSystem\bookstore-backend\src\main\java\
 C:\Users\pixle\Desktop\Codebase\BookstoreSystem\bookstore-backend\src\main\java\com\bookstore\system\exception\BookNotFoundException.java
 C:\Users\pixle\Desktop\Codebase\BookstoreSystem\bookstore-backend\src\main\java\com\bookstore\system\controller\BookController.java
 C:\Users\pixle\Desktop\Codebase\BookstoreSystem\bookstore-backend\src\main\java\com\bookstore\system\exception\GlobalExceptionHandler.java
+C:\Users\pixle\Desktop\Codebase\BookstoreSystem\bookstore-backend\src\main\java\com\bookstore\system\service\EmailService.java
 C:\Users\pixle\Desktop\Codebase\BookstoreSystem\bookstore-backend\src\main\java\com\bookstore\system\model\Address.java
 C:\Users\pixle\Desktop\Codebase\BookstoreSystem\bookstore-backend\src\main\java\com\bookstore\system\repository\CompletedOrderRepository.java
 C:\Users\pixle\Desktop\Codebase\BookstoreSystem\bookstore-backend\src\main\java\com\bookstore\system\controller\AdminController.java
