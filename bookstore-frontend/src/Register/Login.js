@@ -13,6 +13,17 @@ export default function Login() {
     const API = 'http://localhost:8080/api/login';
     const key = 'auth';
 
+    function login(key, to) {
+        if (rememberUser) {
+            localStorage.setItem(key, 1);
+            localStorage.setItem("email", email)
+        } else {
+            sessionStorage.setItem(key, 1);
+            sessionStorage.setItem("email", email)
+        }
+        navigate(to);
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
 
@@ -21,24 +32,28 @@ export default function Login() {
             password: password
         }).then((res) => {
             if (res.status === 200) {
-                if (rememberUser) {
-                    localStorage.setItem(key, 1);
-                    localStorage.setItem("email", email)
-                } else {
-                    sessionStorage.setItem(key, 1);
-                    sessionStorage.setItem("email", email)
-                }
-                navigate('/');
+                login(key, '/');
             } else {
                 alert("This shouldn't happen");
             }
         }).catch((err) => {
-            console.log(err);
+            console.log(err.response.data);
+
             if (err.response.status === 403) {
                 alert("Activate your account.");
-            } else {
-                alert("Invalid credentials");
             }
+            axios.get(API + "admin", { // If customer didn't exist, check for admin
+                email: email,
+                password: password
+            }).then((res) => {
+                if (res.status === 200) {
+                    login(key, '/Admin');
+                } else {
+                    alert("This shouldn't happen");
+                }
+            }).catch((err) => { // If neither exists
+                alert("Invalid credentials");
+            })
         })
     }
 
