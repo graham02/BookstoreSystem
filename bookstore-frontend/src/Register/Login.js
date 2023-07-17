@@ -10,6 +10,7 @@ export default function Login()
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] =  useState('');
+    const [rememberUser, setRememberUser] = useState(false);
     const API = 'http://localhost:8080/api/login';
     const key = 'auth';
 
@@ -21,7 +22,11 @@ export default function Login()
             password: password
         }).then((res) => {
             if(res.status === 200) {
-                sessionStorage.setItem(key, 1);
+                if(rememberUser) {
+                    localStorage.setItem(key, 1);
+                } else {
+                    sessionStorage.setItem(key, 1);
+                }
                 navigate('/');
             } else {
                 alert("This shouldn't happen");
@@ -49,15 +54,21 @@ export default function Login()
                 <label>Password:</label>
                 <input type='password' required onChange={(e) => setPassword(e.target.value)}/>
             </div>
-            <Link className='login-leave' to ='/ForgotPassword'>
-                Forgot password?
-            </Link>
+            <div className='remember'>
+                <input type='checkbox' id='remember' onChange={() => setRememberUser(!rememberUser)} />
+                <label htmlFor="remember">Remember Me</label>
+            </div>
+
             <div className='login-btn'>
                 <button type='submit'>Login</button>
             </div>
+            
         </form>   
         <Link className='login-leave' to ='/Signup'>
             Don't have an account?
+        </Link>
+        <Link className='login-leave' to ='/ForgotPassword'>
+            Forgot password?
         </Link>
     </Card>
     </>);

@@ -24,6 +24,26 @@
     width: 90%;
 }
 
+.remember {
+    display: block;
+    text-align: end;
+    padding-top: 1em;
+}
+
+.remember label {
+    display: inline-block;
+    width: auto;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 1em;
+    text-align: left;
+}
+
+.remember input {
+    display: inline-block;
+    width: auto;
+}
+
 .login-btn {
     text-decoration: none;
 }
@@ -54,3 +74,4 @@
 .login-leave:hover {
     color: blue;
 }
+
