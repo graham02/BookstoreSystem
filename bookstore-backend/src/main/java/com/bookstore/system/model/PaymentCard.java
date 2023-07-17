@@ -9,8 +9,9 @@ public class PaymentCard {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private String lastFour;
     @NotBlank(message = "Card number cannot be blank")
-    private String card;
+    private String cardNumber;
     @NotBlank(message = "Name on card cannot be blank")
     private String cardOwner;
     @NotBlank(message = "Expiration date cannot be blank")
@@ -26,12 +27,12 @@ public class PaymentCard {
         this.id = id;
     }
 
-    public String getCard() {
-        return card;
+    public String getCardNumber() {
+        return cardNumber;
     }
 
-    public void setCard(String card) {
-        this.card = card;
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     public String getCardOwner() {
@@ -56,5 +57,13 @@ public class PaymentCard {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public String getLastFour() {
+        return lastFour;
+    }
+
+    public void setLastFour(String lastFour) {
+        this.lastFour = lastFour;
     }
 }
