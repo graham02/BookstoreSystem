@@ -121,6 +121,34 @@ public class CustomerController {
         return ResponseEntity.badRequest().body("Account doesn't exist");
     }
 
+    @PostMapping("/api/reset")
+    public ResponseEntity<String> resetAccount(@RequestParam("email") String email) {
+        Customer customer = customerRepository.findByEmail(email);
+        customer.setConfirmationToken(UUID.randomUUID().toString());
+
+        if(customer != null) {
+            SimpleMailMessage mailMessage = new SimpleMailMessage();
+            mailMessage.setTo(customer.getEmail());
+            mailMessage.setSubject("Reset your password");
+            mailMessage.setText("To reset your password, please click here : "
+                    +"http://localhost:8080/verify-reset?token="+customer.getVerificationToken());
+            emailService.sendEmail(mailMessage);
+        }
+        return ResponseEntity.ok().body("Request Received");
+    }
+
+    @GetMapping("/verify-reset")
+    public ResponseEntity<String> confirmReset(@RequestParam("token") String verificationToken, @RequestParam("password") String password) {
+        Customer customer = customerRepository.findByVerificationToken(verificationToken);
+
+        if(customer != null) {
+            // encrypt their password
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            customer.setPassword(passwordEncoder.encode(password));
+            return ResponseEntity.ok().body("Password changed");
+        }
+        return ResponseEntity.badRequest().body("Error setting password");
+    }
     
     @PostMapping("/api/login")
     ResponseEntity<String> userLogin(@Valid @RequestBody Login login) {

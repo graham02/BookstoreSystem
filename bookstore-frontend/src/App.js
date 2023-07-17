@@ -17,6 +17,7 @@ import Shop from './Shop/Shop';
 import View from './Shop/View';
 import Cart from './Checkout/Cart';
 import Checkout from './Checkout/Checkout'
+import ResetPassword from './Register/ResetPassword';
 
 export default function App() {
   return (
@@ -38,6 +39,7 @@ export default function App() {
         <Route path ='Admin/ManageBooks/RemoveBook/:isbn' element={<Remove/>}/>
         <Route path ='Admin/ManageBooks/UpdateBook/:isbn' element={<Update/>}/>
         <Route path='/Admin/ManageBooks/Update' element={<UpdateBook/>} />
+        <Route path='/ResetPassword/:token' element={<ResetPassword/>} />
         <Route path='*' element={<ErrorPage/>} />
       </Routes>
     </Router>
