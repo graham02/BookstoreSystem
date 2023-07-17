@@ -73,11 +73,37 @@ public class CustomerController {
     public ResponseEntity<String> confirmEmail(@RequestParam("token") String verificationToken) {
         Customer customer = customerRepository.findByVerificationToken(verificationToken);
 
-        if(customer != null)
-        {
-            customer.setCustomerState(Customer.CUSTOMER_STATE.ACTIVE);
-            customerRepository.save(customer);
-            return ResponseEntity.ok("Account has been activated");
+        if(customer != null) {
+            if (customer.getCustomerState() != Customer.CUSTOMER_STATE.ACTIVE) {
+                customer.setCustomerState(Customer.CUSTOMER_STATE.ACTIVE);
+                customerRepository.save(customer);
+                return ResponseEntity.ok("<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                        "    <title>Account Activated</title>\n" +
+                        "</head>\n" +
+                        "<body style=\"background-color: rgb(243, 243, 243);\">\n" +
+                        "    <h1 style=\"font-size: 4em;text-align: center;padding-top: 2em;font-family: font-family:Arial, Helvetica, sans-serif;;\">\n" +
+                        "        Your account has been successfully activated!\n" +
+                        "    </h1>\n" +
+                        "</body>\n" +
+                        "</html>");
+            } else
+                return ResponseEntity.ok("<!DOCTYPE html>\n" +
+                        "<html lang=\"en\">\n" +
+                        "<head>\n" +
+                        "    <meta charset=\"UTF-8\">\n" +
+                        "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+                        "    <title>Account Activated</title>\n" +
+                        "</head>\n" +
+                        "<body style=\"background-color: rgb(243, 243, 243);\">\n" +
+                        "    <h1 style=\"font-size: 4em;text-align: center;padding-top: 2em;font-family: font-family:Arial, Helvetica, sans-serif;;\">\n" +
+                        "        Your account has already been activated.\n" +
+                        "    </h1>\n" +
+                        "</body>\n" +
+                        "</html>");
         }
         return ResponseEntity.badRequest().body("Account doesn't exist");
     }
