@@ -6,22 +6,25 @@ import AdminMenu from './AdminMenu';
 import Card from '../Card';
 
 export default function Admin() {
-    const key = 'auth';
     const [admin, setAdminStatus] = useState(false);
 
-    const API = 'http://localhost:8080/exists/admin';
+    const API = 'http://localhost:8080/exists/admin/:';
 
     function checkAdminStatus() {
-        axios.get(API,
-            {
-                params: { token: localStorage.getItem(key) || sessionStorage.getItem(key) }
-            }).then((res) => {
-                console.log("You're an admin!");
+        const email = localStorage.getItem('email') || sessionStorage.getItem('email');
+        
+        if (email) {
+            axios.get(API + email)
+            .then((res) => {
                 setAdminStatus(true);
-            }).catch((err) => {
-                console.log(err.response.data);
+            })
+            .catch((err) => {
+                console.log(err.response);
                 setAdminStatus(false);
-            });
+            })
+        } else {
+            setAdminStatus(false);
+        }
     }
 
     // eslint-disable-next-line
