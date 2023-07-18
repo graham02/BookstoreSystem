@@ -3,8 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function Nagivation(props)
 {
-    const key = 'auth';
-    let loggedIn = sessionStorage.getItem(key) || localStorage.getItem(key) || false; // temp value to manually update for viewing account stuff
+    const key = 'jwtToken';
+    let loggedIn = sessionStorage.getItem(key) || localStorage.getItem(key) || false;
     const navigate = useNavigate();
 
     return (<>
@@ -27,7 +27,7 @@ export default function Nagivation(props)
                     <Link className='nav-link' to='/Account'>Account</Link>
                 </li>
                 <li key='logout'>
-                    <button className='nav-button' onClick={() => {sessionStorage.removeItem(key); localStorage.removeItem(key); navigate('/')}}>Logout</button>
+                    <button className='nav-button' onClick={() => {sessionStorage.clear(); localStorage.clear(); navigate('/')}}>Logout</button>
                 </li>
                 </>    
                 :
