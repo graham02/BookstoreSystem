@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 export default function AdminMenu()
 {
-    const key = 'auth';
+    const key = 'jwtToken';
     const navigate = useNavigate();
 
     return (<>
