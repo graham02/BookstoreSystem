@@ -11,16 +11,17 @@ export default function Login() {
     const [password, setPassword] = useState('');
     const [rememberUser, setRememberUser] = useState(false);
     const API = 'http://localhost:8080/api/login';
-    const key = 'auth';
+    const key = 'jwtToken';
 
-    function login(key, to) {
+    function login(jwtToken, to) {
         if (rememberUser) {
-            localStorage.setItem(key, 1);
+            localStorage.setItem(key, jwtToken);
             localStorage.setItem("email", email)
         } else {
-            sessionStorage.setItem(key, 1);
+            sessionStorage.setItem(key, jwtToken);
             sessionStorage.setItem("email", email)
         }
+        axios.defaults.headers.common = {'Authorization': `Bearer ${jwtToken}`}
         navigate(to);
     }
 
@@ -32,7 +33,7 @@ export default function Login() {
             password: password
         }).then((res) => {
             if (res.status === 200) {
-                login(key, '/');
+                login(res.data, '/');
             } else {
                 alert("This shouldn't happen");
             }
@@ -47,7 +48,7 @@ export default function Login() {
                 password: password
             }).then((res) => {
                 if (res.status === 200) {
-                    login(key, '/Admin');
+                    login(res.data, '/Admin');
                 } else {
                     alert("This shouldn't happen");
                 }
