@@ -12,7 +12,7 @@ export default function ResetPassword()
     const navigate = useNavigate();
     const [isOpen, setIsOpen] = useState(false);
     const API = 'http://localhost:8080/verify-reset';
-    const [message, setMessage] = useState('Email being sent...');
+    const [message, setMessage] = useState('Changing password...');
 
     const handleSubmit = (e) => {
         e.preventDefault();
