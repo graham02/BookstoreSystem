@@ -9,26 +9,28 @@ import axios from 'axios';
 export default function AccountPage() {
     const [isAllowed, setIsAllowed] = useState(false);
 
-    ////////////////////////////////////////////////////////////////
-    // Redirects user away if not logged in.
-    const key = 'auth';
-    const API = 'http://localhost:8080/exists/';
+    // fetch user profile
+    const API = 'http://localhost:8080/api/profile/:';
     const navigate = useNavigate();
+
     useEffect(() => {
-        // Checking session/local storage for a token and verifying it matches to someone
-        axios.get(API + "customer", // Check for customer
-            {
-                params: { token: localStorage.getItem(key) || sessionStorage.getItem(key) }
-            }).catch(() => {
-                axios.get(API + "admin", // If customer didn't exist, check for admin
-                    {
-                        params: { token: localStorage.getItem(key) || sessionStorage.getItem(key) }
-                    }).catch(() => {
-                        setIsAllowed(false);
-                    });
-            });
+        const email = localStorage.getItem('email') || sessionStorage.getItem('email');
+        
+        if (email) {
+            axios.get(API + email)
+            .then((res) => {
+                // res.data=customer json data
+                console.log(res.data);
+                setIsAllowed(true);
+            })
+            .catch((err) => {
+                console.log(err.response);
+                setIsAllowed(false);
+            })
+        } else {
+            setIsAllowed(false);
+        }
     }, [navigate])
-    ////////////////////////////////////////////////////////////////
 
     const [editInfo, setEditInfo] = useState(false);
     const [editPaym, setEditPaym] = useState(false);
@@ -137,8 +139,8 @@ export default function AccountPage() {
                 <Link to='/Account/OrderHistory' className='account-edit-btn account-link'>View</Link>
             </Card>)
             :
-            (<div className='login-for-account'> 
-                <br/>
+            (<div className='login-for-account'>
+                <br />
                 <h1>Login to view/edit account details.</h1>
             </div>)
         }
