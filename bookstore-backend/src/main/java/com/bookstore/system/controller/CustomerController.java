@@ -6,10 +6,13 @@ import com.bookstore.system.model.Login;
 import com.bookstore.system.model.PaymentCard;
 import com.bookstore.system.repository.CustomerRepository;
 import com.bookstore.system.service.EmailService;
+import com.bookstore.system.service.JwtService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +26,13 @@ public class CustomerController {
     private CustomerRepository customerRepository;
 
     @Autowired
-    EmailService emailService;
+    private EmailService emailService;
+
+    @Autowired
+    private JwtService jwtService;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @PostMapping("/api/signup")
     ResponseEntity<String> newCustomer(@Valid @RequestBody Customer newCustomer) {
@@ -76,9 +85,10 @@ public class CustomerController {
 
         // save customer in database
         customerRepository.save(newCustomer);
+        String jwtToken = jwtService.generateToken(newCustomer);
 
         // account creation success
-        return ResponseEntity.ok().body("Account created");
+        return ResponseEntity.ok().body("Account creation success");
     }
 
     @GetMapping("/verify-account")
@@ -134,9 +144,9 @@ public class CustomerController {
             mailMessage.setText("To reset your password, please click here : "
                     +"http://localhost:3000/ResetPassword/"+customer.getVerificationToken());
             emailService.sendEmail(mailMessage);
-
+            return ResponseEntity.ok().body("Request Received");
         }
-        return ResponseEntity.ok().body("Request Received");
+        return ResponseEntity.badRequest().body("Account not found");
     }
 
     @PostMapping("/verify-reset")
@@ -156,25 +166,27 @@ public class CustomerController {
             emailService.sendEmail(mailMessage);
 
             return ResponseEntity.ok().body("Password changed");
-            
         }
         return ResponseEntity.badRequest().body("Error setting password");
     }
-    
+
     @PostMapping("/api/login")
     ResponseEntity<String> userLogin(@Valid @RequestBody Login login) {
+        authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        login.getEmail(),
+                        login.getPassword()
+                )
+        );
+
         Customer customer = customerRepository.findByEmail(login.getEmail());
 
         if (customer != null) {
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-            boolean isMatch = passwordEncoder.matches(login.getPassword(), customer.getPassword());
-
-            if (isMatch) {
-                if(customer.getCustomerState() == Customer.CUSTOMER_STATE.ACTIVE)
-                    return ResponseEntity.ok().body(customer.getVerificationToken());
-                if(customer.getCustomerState() == Customer.CUSTOMER_STATE.INACTIVE)
-                    return ResponseEntity.status(403).body("Account not activated");
-            }
+            // if here then user is authenticated and exists
+            if(customer.getCustomerState() == Customer.CUSTOMER_STATE.ACTIVE)
+                return ResponseEntity.ok().body(jwtService.generateToken(customer));
+            if(customer.getCustomerState() == Customer.CUSTOMER_STATE.INACTIVE)
+                return ResponseEntity.status(403).body("Account not activated");
         }
         return ResponseEntity.badRequest().body("Invalid Credentials");
     }
@@ -185,14 +197,6 @@ public class CustomerController {
 
         if (customer != null)
             return ResponseEntity.ok().body(customer);
-        return ResponseEntity.badRequest().body("Invalid Credentials");
-    }
-
-    @GetMapping("/exists/customer")
-    public ResponseEntity<?> doesCustomerExist(@RequestParam("token") String token) {
-        Customer customer = customerRepository.findByVerificationToken(token);
-        if (customer != null)
-            return ResponseEntity.ok().body("customer exists");
         return ResponseEntity.badRequest().body("Invalid Credentials");
     }
 }
